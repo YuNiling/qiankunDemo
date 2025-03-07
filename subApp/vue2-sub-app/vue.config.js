@@ -11,6 +11,9 @@ module.exports = defineConfig({
       'Access-Control-Allow-Origin': '*'
     }
   },
+  // css: {
+  //   modules: true
+  // },
   configureWebpack: {
     output: {
       library: `${name}-[name]`,

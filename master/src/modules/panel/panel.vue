@@ -18,8 +18,8 @@
         </li>
       </ul>
       <div class="content">
-        <keep-alive :include="keepAliveArr">
-          <component :is="currAppComponent"></component>
+        <keep-alive>
+          <component :is="activeComponent"></component>
         </keep-alive>
       </div>
     </div>
@@ -27,25 +27,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted, markRaw, defineAsyncComponent, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted, markRaw } from 'vue';
 import { loadMicroApp, prefetchApps } from 'qiankun';
 import themeList from '@/utils/theme.js';
+import { useRouter } from 'vue-router';
 
 const keepAliveArr = ref([]);
-
 const activeMenu = ref('vue2-sub-app');
 const menuChange = (menu) => {
   activeMenu.value = menu.name;
   loadApp(menu.name);
 };
 
-const currAppComponent = ref(null);
-const subApp = ref(null);
-const asyncComponentLoaded = ref(false);
+const activeComponent = ref(null);
+const microApp = ref(null);
 const loadApp = async (appName) => {
-  if (subApp.value) {
-    subApp.value.unmount(); //  卸载之前的子应用
-    subApp.value = null;
+  if (microApp.value) {
+    microApp.value.unmount(); //  卸载之前的子应用
   }
 
   const theme = themeList.find((v) => v.name === appName);
@@ -56,22 +54,9 @@ const loadApp = async (appName) => {
   }
 
   const loader = theme.component;
-  // const asyncComp = defineAsyncComponent(loader);
-  // loader().then(() => {
-  //   subApp.value = loadMicroApp(theme);
-  // });
-  // await nextTick();
-  const asyncComp = defineAsyncComponent({
-    loader,
-    loadingComponent: {
-      template: '<p>加载中...</p>'
-    }
-  });
-
-  currAppComponent.value = markRaw(asyncComp);
-  asyncComp.__asyncLoader().then(() => {
-    subApp.value = loadMicroApp(theme);
-  });
+  const asyncComp  = (await loader()).default;
+  activeComponent.value = markRaw(asyncComp);
+  microApp.value = loadMicroApp(theme);
 };
 
 // 预加载所有子应用
@@ -83,9 +68,31 @@ const preLoadApps = () => {
   });
 };
 
+const router = useRouter();
+
+router.beforeEach((to, from, next) => {
+  const toPath = to.fullPath;
+  if (toPath.startsWith('/sub-app/')) {
+    const theme = themeList.filter((v) => {
+      return toPath.startsWith(v.props.routerBase);
+    })
+    if (theme) {
+      menuChange(theme[0]);
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 onMounted(() => {
-  preLoadApps();
   menuChange(themeList[0]);
+  preLoadApps();
+});
+
+onUnmounted(() => {
+  microApp.value && microApp.value.unmount();
 });
 </script>
 

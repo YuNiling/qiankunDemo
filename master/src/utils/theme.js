@@ -6,7 +6,9 @@ const themeList = [
     container: '#sub-vue2-container',
     component: () => import('@/theme/vue2App.vue'),
     permission: 'sub_vue2_app',
-    props: {}
+    props: {
+      routerBase: '/sub-app/vue2-demo/'
+    },
   },
   {
     name: 'vue3-sub-app',
@@ -15,7 +17,9 @@ const themeList = [
     container: '#sub-vue3-container',
     component: () => import('@/theme/vue3App.vue'),
     permission: 'sub_vue3_app',
-    props: {}
+    props: {
+      routerBase: '/sub-app/vue3-demo/'
+    }
   }
 ];
 
