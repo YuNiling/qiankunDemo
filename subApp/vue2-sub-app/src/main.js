@@ -1,7 +1,8 @@
-import './public-path.js';
+import '@/public-path.js';
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import App from '@/App.vue';
+import router from '@/router';
+import { directives } from '@/assets/utils/MicroApps.js';
 
 Vue.config.productionTip = false
 
@@ -32,4 +33,11 @@ export async function unmount() {
   instance.$destroy();
   instance.$el.innerHTML = '';
   instance = null;
+}
+
+if (directives) {
+  console.log('directives', directives);
+  directives.forEach((directive) => {
+    Vue.directive(directive.name, directive.value);
+  })
 }

@@ -69,7 +69,6 @@ const preLoadApps = () => {
 };
 
 const router = useRouter();
-
 router.beforeEach((to, from, next) => {
   const toPath = to.fullPath;
   if (toPath.startsWith('/sub-app/')) {

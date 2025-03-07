@@ -1,15 +1,16 @@
 <template>
-  <div id="app">
-    <h2>Vue2 子应用</h2>
-    <router-link to="/homePage">Home</router-link>
-    <router-link to="/aboutPage">About</router-link>
-
-    <button @click="toVue3">跳转到vue3 子应用 about</button>
-
+  <div>
+    <div class="header">
+      <router-link to="/homePage">Home</router-link>
+      <router-link to="/aboutPage">About</router-link>
+      <router-link to="/directiveDemo">自定义指令</router-link>
+      <button @click="toVue3">跳转到vue3 子应用 about</button>
+    </div>
     <router-view></router-view>
 
-    <input v-model="message" />
-    <div>{{ message | capitalize }}</div>
+    <!-- <input v-model="message" /> -->
+    <!-- <div>{{ message | capitalize }}</div> -->
+
   </div>
 </template>
 
@@ -21,7 +22,8 @@ export default {
   components: {},
   data() {
     return {
-      message: ''
+      message: '',
+      directiveMsg: '自定义指令'
     };
   },
   filters: {
@@ -48,9 +50,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 h2 {
   text-align: center;
+  color: @primary-color;
 }
 
 a {
@@ -64,5 +67,11 @@ button {
   font-size: 14px;
   padding: 6px 20px;
   border-radius: 4px;
+}
+
+.header {
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 </style>
