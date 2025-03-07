@@ -7,10 +7,17 @@ import router from '@/router/index.js';
 let app = null;
 
 function render(props = {}) {
-  const { container } = props;
+  const { container, directives } = props;
+
   app = createApp(App);
   app.use(router);
   app.mount(container ? container.querySelector('#app') : '#app');
+
+  if (directives) {
+    directives.forEach((directive) => {
+      app.directive(directive.name, directive.value);
+    });
+  }
 }
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {

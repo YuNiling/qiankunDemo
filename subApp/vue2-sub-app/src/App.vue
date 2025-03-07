@@ -27,7 +27,7 @@ export default {
     };
   },
   filters: {
-    capitalize: function(value) {
+    capitalize: function (value) {
       if (!value) return '';
       value = value.toString();
       return value.charAt(0).toUpperCase() + value.slice(1)
@@ -56,10 +56,6 @@ h2 {
   color: @primary-color;
 }
 
-a {
-  margin: 0 20px;
-}
-
 button {
   color: #fff;
   background-color: rgb(64, 158, 255);
@@ -73,5 +69,10 @@ button {
   height: 40px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid @border-color;
+
+  a {
+    margin: 0 20px;
+  }
 }
 </style>

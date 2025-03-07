@@ -2,18 +2,23 @@ import '@/public-path.js';
 import Vue from 'vue';
 import App from '@/App.vue';
 import router from '@/router';
-import { directives } from '@/assets/utils/MicroApps.js';
 
 Vue.config.productionTip = false
 
 let instance = null;
 function render(props = {}) {
-  const { container } = props;
+  const { container, directives } = props;
 
   instance = new Vue({
     router,
     render: (h) => h(App),
   }).$mount(container ? container.querySelector('#app') : '#app');
+
+  if (directives) {
+    directives.forEach((directive) => {
+      Vue.directive(directive.name, directive.value);
+    })
+  }
 }
 
 // 独立运行时
@@ -33,11 +38,4 @@ export async function unmount() {
   instance.$destroy();
   instance.$el.innerHTML = '';
   instance = null;
-}
-
-if (directives) {
-  console.log('directives', directives);
-  directives.forEach((directive) => {
-    Vue.directive(directive.name, directive.value);
-  })
 }

@@ -29,8 +29,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, markRaw } from 'vue';
 import { loadMicroApp, prefetchApps } from 'qiankun';
-import themeList from '@/utils/theme.js';
 import { useRouter } from 'vue-router';
+import themeList from '@/assets/utils/theme.js';
+import { directives } from '@/assets/utils/MicroApps.js';
 
 const keepAliveArr = ref([]);
 const activeMenu = ref('vue2-sub-app');
@@ -56,6 +57,9 @@ const loadApp = async (appName) => {
   const loader = theme.component;
   const asyncComp  = (await loader()).default;
   activeComponent.value = markRaw(asyncComp);
+  theme.props = Object.assign(theme.props, {
+    directives
+  });
   microApp.value = loadMicroApp(theme);
 };
 

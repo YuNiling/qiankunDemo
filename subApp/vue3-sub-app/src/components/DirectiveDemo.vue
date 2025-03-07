@@ -1,6 +1,5 @@
 <template>
     <div class="directive-demo-container">
-      <h3>自定义指令</h3>
       <div v-color="'red'">自定义指令</div>
       <input v-model="directiveMsg" v-focus />
       <div class="drag-box">

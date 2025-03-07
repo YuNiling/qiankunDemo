@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/directiveDemo',
     name: 'DirectiveDemo',
-    component: () =>  import('../components/DirectiveDemo.vue')
+    component: () =>  import('@/components/DirectiveDemo.vue')
   }
 ];
 

@@ -8,7 +8,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        additionalData: `@import "${path.resolve(__dirname, 'src/styles/variables.less')}";`
+        additionalData: `@import "${path.resolve(__dirname, 'src/assets/styles/variables.less')}";`,
+        javascriptEnabled: true
       }
     }
   },

@@ -22,10 +22,18 @@ export default defineConfig({
       'Access-Control-Allow-Origin': '*'
     }
   },
-  base: process.env.NODE_ENV === 'production' ? '/subapp/vue3-sub-app/' : `//localhost:${port}/`,
+  base: process.env.NODE_ENV === 'production' ? '/subapp/vue3-sub-app/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        additionalData: `@import "${path.resolve(__dirname, 'src/assets/styles/variables.less')}";`,
+        javascriptEnabled: true
+      }
     }
   },
   build: {
