@@ -1,8 +1,8 @@
 <template>
-  <div class="header">
-    <router-link to="/home">Home</router-link>
-    <router-link to="/about">About</router-link>
-    <router-link to="/directiveDemo">自定义指令</router-link>
+  <div class="router-header">
+    <router-link class="router-link" to="/directiveDemo">自定义指令</router-link>
+    <router-link class="router-link" to="/filterDemo">过滤器</router-link>
+    <router-link class="router-link" to="/prototypeDemo">全局属性/方法</router-link>
   </div>
 
   <router-view></router-view>
@@ -17,9 +17,5 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid @border-color;
-
-  a {
-    margin: 0 20px;
-  }
 }
 </style>

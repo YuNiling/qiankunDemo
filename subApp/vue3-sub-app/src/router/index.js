@@ -4,22 +4,22 @@ import { qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 const routes = [
   {
     path: '/',
-    redirect: '/home',
-  },
-  {
-    path: '/home',
-    name: 'Home',
-    component: () => import('@/components/Home.vue')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/components/About.vue')
+    redirect: '/filterDemo',
   },
   {
     path: '/directiveDemo',
     name: 'DirectiveDemo',
     component: () =>  import('@/components/DirectiveDemo.vue')
+  },
+  {
+    path: '/filterDemo',
+    name: 'FilterDemo',
+    component: () =>  import('@/components/FilterDemo.vue')
+  },
+  {
+    path: '/prototypeDemo',
+    name: 'PrototypeDemo',
+    component: () =>  import('@/components/PrototypeDemo.vue')
   }
 ];
 

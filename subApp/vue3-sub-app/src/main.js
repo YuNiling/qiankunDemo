@@ -7,7 +7,7 @@ import router from '@/router/index.js';
 let app = null;
 
 function render(props = {}) {
-  const { container, directives } = props;
+  const { container, directives, filters, prototypes } = props;
 
   app = createApp(App);
   app.use(router);
@@ -17,6 +17,18 @@ function render(props = {}) {
     directives.forEach((directive) => {
       app.directive(directive.name, directive.value);
     });
+  }
+
+  if (filters) {
+    filters.forEach((filter) => {
+      app.config.globalProperties[`$${filter.name}`] = filter.value;
+    });
+  }
+
+  if (prototypes) {
+    prototypes.forEach(((prototype) => {
+      app.config.globalProperties[prototype.name] = prototype.value;
+    }));
   }
 }
 

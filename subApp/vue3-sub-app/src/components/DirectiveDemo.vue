@@ -1,5 +1,5 @@
 <template>
-    <div class="directive-demo-container">
+    <div class="demo-container">
       <div v-color="'red'">自定义指令</div>
       <input v-model="directiveMsg" v-focus />
       <div class="drag-box">
@@ -9,32 +9,13 @@
     </div>
 </template>
 
-<script>
-export default {
-  name: 'DirectiveDemo',
-  data() {
-    return {
-      directiveMsg: '自定义指令'
-    };
-  },
-  mounted() {
+<script setup>
+import { ref } from 'vue';
 
-  },
-  created() {
-    
-  },
-  methods: {
-
-  }
-}
+const directiveMsg = ref('自定义指令');
 </script>
 
 <style scoped lang="less">
-.directive-demo-container {
-  height: calc(100vh - 157px);
-  padding: 20px 20px;
-}
-
 .drag-box {
   margin-top: 30px;
   margin-bottom: 30px;
