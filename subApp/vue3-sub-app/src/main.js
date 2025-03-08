@@ -7,7 +7,7 @@ import router from '@/router/index.js';
 let app = null;
 
 function render(props = {}) {
-  const { container, directives, filters, prototypes } = props;
+  const { container, directives, filters, prototypes, eventBus } = props;
 
   app = createApp(App);
   app.use(router);
@@ -29,6 +29,10 @@ function render(props = {}) {
     prototypes.forEach(((prototype) => {
       app.config.globalProperties[prototype.name] = prototype.value;
     }));
+  }
+
+  if (eventBus) {
+    app.config.globalProperties.$bus = eventBus;
   }
 }
 

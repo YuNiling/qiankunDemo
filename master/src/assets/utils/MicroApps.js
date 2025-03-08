@@ -2,6 +2,9 @@ import vColor from './vColor.js';
 import vFocus from './vFocus.js';
 import vDrag from './vDrag.js';
 import vHighlight from './vHighlight.js';
+import dayjs from 'dayjs';
+import * as tools from './tools.js';
+import mitt from 'mitt';
 
 const capitalize = function (value) {
   if (!value) return '';
@@ -30,7 +33,18 @@ const filters = [
   { name: 'discount', value: discount }
 ];
 
+// 全局属性/方法
+const prototypes = [
+  { name: '$dayjs', value: dayjs },
+  { name: '$tools', value: tools },
+];
+
+// 事件总线（Event Bus）
+const eventBus = new mitt();
+
 export {
   directives,
-  filters
+  filters,
+  prototypes,
+  eventBus
 };

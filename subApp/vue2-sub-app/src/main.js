@@ -7,7 +7,7 @@ Vue.config.productionTip = false
 
 let instance = null;
 function render(props = {}) {
-  const { container, directives } = props;
+  const { container, directives, filters, prototypes, eventBus } = props;
 
   instance = new Vue({
     router,
@@ -18,6 +18,22 @@ function render(props = {}) {
     directives.forEach((directive) => {
       Vue.directive(directive.name, directive.value);
     })
+  }
+
+  if (filters) {
+    filters.forEach((filter) => {
+      Vue.filter(filter.name, filter.value);
+    });
+  }
+
+  if (prototypes) {
+    prototypes.forEach(((prototype) => {
+      Vue.prototype[prototype.name] = prototype.value;
+    }));
+  }
+
+  if (eventBus) {
+    Vue.prototype.$bus = eventBus;
   }
 }
 

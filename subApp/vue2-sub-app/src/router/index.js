@@ -6,22 +6,27 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: '/homePage'
-  },
-  {
-    path: '/homePage',
-    name: 'HomePage',
-    component: () => import('../components/HomePage.vue')
-  },
-  {
-    path: '/aboutPage',
-    name: 'AboutPage',
-    component: () =>  import('../components/AboutPage.vue')
+    redirect: '/filterDemo'
   },
   {
     path: '/directiveDemo',
     name: 'DirectiveDemo',
     component: () =>  import('@/components/DirectiveDemo.vue')
+  },
+  {
+    path: '/filterDemo',
+    name: 'FilterDemo',
+    component: () =>  import('@/components/FilterDemo.vue')
+  },
+  {
+    path: '/prototypeDemo',
+    name: 'PrototypeDemo',
+    component: () =>  import('@/components/PrototypeDemo.vue')
+  },
+  {
+    path: '/eventBusDemo',
+    name: 'EventBusDemo',
+    component: () =>  import('@/components/EventBusDemo.vue')
   }
 ];
 

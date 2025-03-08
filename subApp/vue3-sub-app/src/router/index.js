@@ -20,6 +20,11 @@ const routes = [
     path: '/prototypeDemo',
     name: 'PrototypeDemo',
     component: () =>  import('@/components/PrototypeDemo.vue')
+  },
+  {
+    path: '/eventBusDemo',
+    name: 'EventBusDemo',
+    component: () =>  import('@/components/EventBusDemo.vue')
   }
 ];
 

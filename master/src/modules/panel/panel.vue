@@ -23,20 +23,21 @@
         </keep-alive>
       </div>
     </div>
+    <div class="dialog" v-if="eventBusReceivedMsg">
+      <span class="close-icon" @click="closeEventBusDialog">x</span>
+      <p>接收到的消息：{{ eventBusReceivedMsg }}</p>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, markRaw } from 'vue';
+import { ref, onMounted, onUnmounted, markRaw, getCurrentInstance } from 'vue';
 import { loadMicroApp, prefetchApps } from 'qiankun';
 import { useRouter } from 'vue-router';
 import themeList from '@/assets/utils/theme.js';
-import { directives, filters } from '@/assets/utils/MicroApps.js';
+import * as microAppsProps from '@/assets/utils/MicroApps.js';
 
-const microAppsProps = {
-  directives,
-  filters
-};
+const instance = getCurrentInstance();
 
 const keepAliveArr = ref([]);
 const activeMenu = ref('vue2-sub-app');
@@ -92,6 +93,15 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+const eventBusReceivedMsg = ref('');
+const bus = instance.appContext.config.globalProperties.$bus;
+bus.on('test-event', (data) => {
+  eventBusReceivedMsg.value = data;
+});
+const closeEventBusDialog = () => {
+  eventBusReceivedMsg.value = '';
+};
+
 onMounted(() => {
   menuChange(themeList[0]);
   preLoadApps();
@@ -99,6 +109,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   microApp.value && microApp.value.unmount();
+  bus.off('test-event');
 });
 </script>
 
@@ -133,6 +144,34 @@ onUnmounted(() => {
   
     .content {
       flex: 1;
+    }
+  }
+
+  .dialog {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid @border-color;
+    padding: 20px 30px;
+    font-size: 14px;
+    box-shadow: 0px -5px 5px rgba(0, 0, 0, .4);
+    border-radius: 4px;
+
+    .close-icon {
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: red;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      line-height: 15px;
+      cursor: pointer;
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="directive-demo-container">
+    <div class="demo-container">
       <h3>自定义指令</h3>
       <div v-color="'red'">自定义指令</div>
       <input v-model="directiveMsg" v-focus />
@@ -31,11 +31,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-.directive-demo-container {
-  height: calc(100vh - 157px);
-  padding: 20px 20px;
-}
-
 .drag-box {
   margin-top: 30px;
   margin-bottom: 30px;
