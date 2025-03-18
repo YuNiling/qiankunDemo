@@ -3,15 +3,10 @@ import '@/public-path.js';
 import '@/assets/styles/global.less';
 import App from '@/App.vue';
 import router from '@/router/index.js';
-import store from '@/store/index.js';
 import { directives, eventBus } from '@/assets/utils/MicroApps.js';
+import store from '@/store/index';
 
 const app = createApp(App);
-
-app.use(router);
-app.use(store);
-
-app.mount('#app');
 
 if (directives) {
   directives.forEach((directive) => {
@@ -22,3 +17,7 @@ if (directives) {
 if (eventBus) {
   app.config.globalProperties.$bus = eventBus;
 }
+
+app.use(router);
+app.use(store);
+app.mount('#app');

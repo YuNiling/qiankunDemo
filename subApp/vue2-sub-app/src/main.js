@@ -1,16 +1,41 @@
 import '@/public-path.js';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import App from '@/App.vue';
 import router from '@/router';
+import subStore from './store';
 
 Vue.config.productionTip = false
+Vue.use(Vuex);
 
 let instance = null;
+const storeModuleName = 'vue2Module';
+let store;
 function render(props = {}) {
   const { container, directives, filters, prototypes, eventBus } = props;
 
+  if (window.__POWERED_BY_QIANKUN__) {
+    if (props.rootStore) {
+      store = props.rootStore;
+      if (!store.hasModule(storeModuleName)) {
+        store.registerModule(storeModuleName, subStore);
+      }
+    }
+  }
+
+  if (!store) {
+    store = new Vuex.Store({
+      modules: {
+        [storeModuleName]: subStore
+      }
+    });
+  }
+
+  Vue.observable(store); // 将共享store设置为响应式，否则子应用的store中的值不会改变
+  
   instance = new Vue({
     router,
+    store,
     render: (h) => h(App),
   }).$mount(container ? container.querySelector('#app') : '#app');
 

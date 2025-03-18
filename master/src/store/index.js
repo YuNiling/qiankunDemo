@@ -1,14 +1,21 @@
 import { createStore } from 'vuex';
+import user from './user';
+import auth from './auth';
+import settings from './settings';
 
 export default createStore({
-  state() {
-    return {
-      count: 0
-    }
+  namespaced: true,
+  modules: {
+    user,
+    auth,
+    settings
   },
+  state: () => ({
+    role: 'admin'
+  }),
   mutations: {
-    increment(state) {
-      state.count++;
+    setRole(state) {
+      state.role = state.role === 'admin' ? '游客' : 'admin';
     }
   }
 });

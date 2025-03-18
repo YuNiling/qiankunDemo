@@ -5,7 +5,7 @@ const path = require('path');
 const port = '8001'
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === 'production' ? '/subapp/vue2-sub-app/' : `//localhost:${port}/`,
+  publicPath: process.env.NODE_ENV === 'production' ? '/subapp/vue2-sub-app/' : '/',
   devServer: {
     port,
     headers: {

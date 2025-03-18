@@ -15,10 +15,3 @@ import { ref } from 'vue';
 const msg = ref('hello vue3');
 const price = ref(1000);
 </script>
-
-<style scoped lang="less">
-.filter-demo-container {
-  height: calc(100vh - 157px);
-  padding: 20px 20px;
-}
-</style>

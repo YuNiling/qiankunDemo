@@ -1,26 +1,32 @@
 <template>
-  <div class="panel">
+  <div class="panel theme" :class="theme">
     <div class="header">
       <h1>主应用</h1>
+      <div class="theme-box">
+        <span>主题：{{ theme }}</span>
+      </div>
+      <div class="user-box">
+        <div v-if="isLoggedIn">
+          <p>{{ name }} / {{ age }} 岁 / {{ role }}</p>
+          <a @click="toggleLogin">登出</a>
+        </div>
+        <div v-else>
+          <a @click="toggleLogin">登陆</a>
+        </div>
+      </div>
     </div>
     <div class="container">
       <ul class="menu">
-        <li 
-          v-for="(menu, index) in themeList"  
-          :key="index"
-          class="menu-item" 
-          :class="{
-            'active': menu.name === activeMenu
-          }"
-          @click="menuChange(menu)"
-        >
+        <li v-for="(menu, index) in themeList" :key="index" class="menu-item" :class="{
+          'active': menu.name === activeMenu
+        }" @click="menuChange(menu)">
           {{ menu.label }}
         </li>
       </ul>
       <div class="content">
-        <keep-alive>
+        <!-- <keep-alive> -->
           <component :is="activeComponent"></component>
-        </keep-alive>
+        <!-- </keep-alive> -->
       </div>
     </div>
     <div class="dialog" v-if="eventBusReceivedMsg">
@@ -31,11 +37,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, markRaw, getCurrentInstance } from 'vue';
+import { ref, onMounted, onUnmounted, markRaw, getCurrentInstance, watch, computed, provide } from 'vue';
 import { loadMicroApp, prefetchApps } from 'qiankun';
 import { useRouter } from 'vue-router';
 import themeList from '@/assets/utils/theme.js';
 import * as microAppsProps from '@/assets/utils/MicroApps.js';
+import { useStore } from 'vuex';
+import rootStore from '@/store/index';
 
 const instance = getCurrentInstance();
 
@@ -61,9 +69,11 @@ const loadApp = async (appName) => {
   }
 
   const loader = theme.component;
-  const asyncComp  = (await loader()).default;
+  const asyncComp = (await loader()).default;
   activeComponent.value = markRaw(asyncComp);
-  theme.props = Object.assign(theme.props, microAppsProps);
+  theme.props = Object.assign(theme.props, microAppsProps, {
+    rootStore
+  });
   microApp.value = loadMicroApp(theme);
 };
 
@@ -93,6 +103,7 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+// Event Bus 测试
 const eventBusReceivedMsg = ref('');
 const bus = instance.appContext.config.globalProperties.$bus;
 bus.on('test-event', (data) => {
@@ -100,6 +111,21 @@ bus.on('test-event', (data) => {
 });
 const closeEventBusDialog = () => {
   eventBusReceivedMsg.value = '';
+};
+
+// vuex 测试
+const store = useStore();
+const role = computed(() => store.state.role);
+const isLoggedIn = computed(() => store.state.auth.isLoggedIn);
+const theme = computed(() => store.state.settings.theme);
+const name = computed(() => store.state.user.name);
+const age = computed(() => store.state.user.age);
+const toggleLogin = () => {
+  if (isLoggedIn.value) {
+    store.commit('auth/logout')
+  } else {
+    store.commit('auth/login')
+  }
 };
 
 onMounted(() => {
@@ -119,29 +145,48 @@ onUnmounted(() => {
     text-align: center;
     padding: 15px 0;
     border-bottom: 1px solid @border-color;
+    position: relative;
+
+    .theme-box {
+      position: absolute;
+      right: 23px;
+      top: 10px;
+    }
+
+    .user-box {
+      position: absolute;
+      right: 23px;
+      top: 30px;
+    }
+
+    a {
+      margin-left: 5px;
+      color: @primary-color;
+      cursor: pointer;
+    }
   }
-  
+
   .container {
     display: flex;
     height: calc(100vh - 79px);
-  
+
     .menu {
       width: 200px;
       border-right: 1px solid @border-color;
-  
+
       .menu-item {
         font-size: @font-size-base;
         padding: 15px 15px;
         color: @default-color;
         cursor: pointer;
         border-bottom: 1px solid @border-color;
-  
+
         &.active {
           color: @primary-color;
         }
       }
     }
-  
+
     .content {
       flex: 1;
     }
