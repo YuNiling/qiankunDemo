@@ -18,7 +18,7 @@ module.exports = defineConfig({
       less: {
         lessOptions: {
           modifyVars: {
-            hack: `true; @import "${path.resolve(__dirname, 'src/assets/styles/variables.less')}";`
+            hack: `true; @import "${path.resolve(__dirname, 'src/assets/variables.less')}";`
           },
           javascriptEnabled: true
         }

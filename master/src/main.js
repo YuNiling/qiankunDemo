@@ -3,7 +3,7 @@ import '@/public-path.js';
 import '@/assets/styles/global.less';
 import App from '@/App.vue';
 import router from '@/router/index.js';
-import { directives, eventBus } from '@/assets/utils/MicroApps.js';
+import { directives, eventBus } from '@/utils/MicroApps.js';
 import store from '@/store/index';
 
 const app = createApp(App);

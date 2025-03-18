@@ -24,9 +24,9 @@
         </li>
       </ul>
       <div class="content">
-        <!-- <keep-alive> -->
+        <keep-alive>
           <component :is="activeComponent"></component>
-        <!-- </keep-alive> -->
+        </keep-alive>
       </div>
     </div>
     <div class="dialog" v-if="eventBusReceivedMsg">
@@ -40,9 +40,9 @@
 import { ref, onMounted, onUnmounted, markRaw, getCurrentInstance, watch, computed, provide } from 'vue';
 import { loadMicroApp, prefetchApps } from 'qiankun';
 import { useRouter } from 'vue-router';
-import themeList from '@/assets/utils/theme.js';
-import * as microAppsProps from '@/assets/utils/MicroApps.js';
 import { useStore } from 'vuex';
+import themeList from '@/utils/theme.js';
+import * as microAppsProps from '@/utils/MicroApps.js';
 import rootStore from '@/store/index';
 
 const instance = getCurrentInstance();

@@ -9,12 +9,12 @@ const routes = [
   {
     path: '/panel',
     name: 'Panel',
-    component: () => import('@/modules/panel/panel.vue'),
+    component: () => import('@/views/panel.vue'),
   },
   // 通配符路由，用于匹配子应用的路由
   {
     path: '/sub-app/:pathMatch(.*)*',
-    component: () => import('@/modules/panel/panel.vue'),
+    component: () => import('@/views/panel.vue'),
   }
 ];
 

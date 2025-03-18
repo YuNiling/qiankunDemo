@@ -6,32 +6,37 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: '/vuexDemo'
+    redirect: '/mixinDemo'
   },
   {
     path: '/directiveDemo',
     name: 'DirectiveDemo',
-    component: () => import('@/components/DirectiveDemo.vue')
+    component: () => import('@/views/DirectiveDemo.vue')
   },
   {
     path: '/filterDemo',
     name: 'FilterDemo',
-    component: () => import('@/components/FilterDemo.vue')
+    component: () => import('@/views/FilterDemo.vue')
   },
   {
     path: '/prototypeDemo',
     name: 'PrototypeDemo',
-    component: () => import('@/components/PrototypeDemo.vue')
+    component: () => import('@/views/PrototypeDemo.vue')
   },
   {
     path: '/eventBusDemo',
     name: 'EventBusDemo',
-    component: () => import('@/components/EventBusDemo.vue')
+    component: () => import('@/views/EventBusDemo.vue')
   },
   {
     path: '/vuexDemo',
     name: 'VuexDemo',
-    component: () => import('@/components/VuexDemo.vue')
+    component: () => import('@/views/VuexDemo.vue')
+  },
+  {
+    path: '/mixinDemo',
+    name: 'MixinDemo',
+    component: () => import('@/views/MixinDemo.vue')
   }
 ];
 

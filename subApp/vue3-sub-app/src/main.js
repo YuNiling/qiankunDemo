@@ -5,7 +5,7 @@ import App from '@/App.vue';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 import router from '@/router/index.js';
 import subStore from '@/store/index.js';
-import { assignNestedProperties } from '@/assets/utils/tools.js';
+import { assignNestedProperties } from '@/utils/tools.js';
 
 let app = null;
 const storeModuleName = 'vue3Module';

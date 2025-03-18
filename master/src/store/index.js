@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
-import user from './user';
-import auth from './auth';
-import settings from './settings';
+import user from './modules/user';
+import auth from './modules/auth';
+import settings from './modules/settings';
 
 export default createStore({
   namespaced: true,

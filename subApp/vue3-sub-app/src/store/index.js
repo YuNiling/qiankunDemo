@@ -1,4 +1,4 @@
-import car from './car.js';
+import car from './modules/car.js';
 
 export default {
   namespaced: true,
