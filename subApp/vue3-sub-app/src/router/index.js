@@ -4,7 +4,19 @@ import { qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 const routes = [
   {
     path: '/',
-    redirect: '/composableFunctionDemo',
+    redirect: '/axiosDemo',
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue'),
+    meta: { requiresAuth: false }
+  },
+  {
+    path: '/axiosDemo',
+    name: 'AxiosDemo',
+    component: () => import('@/views/AxiosDemo.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/directiveDemo',
@@ -35,6 +47,21 @@ const routes = [
     path: '/composableFunctionDemo',
     name: 'ComposableFunctionDemo',
     component: () => import('@/views/ComposableFunctionDemo.vue')
+  },
+  {
+    path: '/vant4Demo',
+    name: 'Vant4Demo',
+    component: () => import('@/views/Vant4Demo.vue')
+  },
+  {
+    path: '/elementPlusDemo',
+    name: 'ElementPlusDemo',
+    component: () => import('@/views/ElementPlusDemo.vue')
+  },
+  {
+    path: '/axiosDemo',
+    name: 'AxiosDemo',
+    component: () => import('@/views/AxiosDemo.vue')
   }
 ];
 
@@ -44,10 +71,15 @@ const router = createRouter({
   routes
 });
 
-// // 全局前置守卫
-// router.beforeEach((to, from, next) => {
-//   // console.log(`从 ${from.name} 页面 跳转到 ${to.name} 页面`);
-//   next();
-// });
+// 全局前置守卫
+router.beforeEach((to, from, next) => {
+  // console.log(`从 ${from.name} 页面 跳转到 ${to.name} 页面`);
+  let token = localStorage.getItem('token');
+  if (token) {
+    next();
+  } else {
+    // window.location.href = "/login";
+  }
+});
 
 export default router;

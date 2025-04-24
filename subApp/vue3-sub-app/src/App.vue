@@ -1,12 +1,12 @@
 <template>
-  <div class="router-header">
+  <!-- <div class="router-header">
     <router-link class="router-link" to="/directiveDemo">自定义指令</router-link>
     <router-link class="router-link" to="/filterDemo">过滤器</router-link>
     <router-link class="router-link" to="/prototypeDemo">全局属性/方法</router-link>
     <router-link class="router-link" to="/eventBusDemo">事件总线</router-link>
     <router-link class="router-link" to="/vuexDemo">Vuex</router-link>
     <router-link class="router-link" to="/composableFunctionDemo">组合式函数</router-link>
-  </div>
+  </div> -->
 
   <router-view></router-view>
 </template>
