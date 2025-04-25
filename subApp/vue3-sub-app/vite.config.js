@@ -35,10 +35,12 @@ export default defineConfig({
   ],
   server: {
     cors: true,
+    host: '0.0.0.0',
     port, // 子应用端口
     headers: {
       'Access-Control-Allow-Origin': '*'
-    }
+    },
+    middlewareMode: false,
   },
   base: process.env.NODE_ENV === 'production' ? '/subapp/vue3-sub-app/' : '/',
   resolve: {
@@ -61,7 +63,7 @@ export default defineConfig({
     }
   },
   build: {
-    minify: 'esbuild',
+    // minify: 'esbuild',
     // terserOptions: {
     //   compress: {
     //     drop_console: true, // 移除console

@@ -33,3 +33,14 @@ export const addUser = (user: UserInfo) => {
     data: user
   });
 };
+
+export const uploadImage = (formData: FormData) => {
+  return request({
+    url: '/api/upload',
+    method: 'POST',
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+};

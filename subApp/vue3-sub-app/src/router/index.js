@@ -4,19 +4,12 @@ import { qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 const routes = [
   {
     path: '/',
-    redirect: '/axiosDemo',
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login.vue'),
-    meta: { requiresAuth: false }
+    redirect: '/vantUploaderDemo',
   },
   {
     path: '/axiosDemo',
     name: 'AxiosDemo',
     component: () => import('@/views/AxiosDemo.vue'),
-    meta: { requiresAuth: true }
   },
   {
     path: '/directiveDemo',
@@ -62,9 +55,18 @@ const routes = [
     path: '/axiosDemo',
     name: 'AxiosDemo',
     component: () => import('@/views/AxiosDemo.vue')
+  },
+  {
+    path: '/vantUploaderDemo',
+    name: 'VantUploaderDemo',
+    component: () => import('@/views/VantUploaderDemo.vue')
+  },
+  {
+    path: '/imageCanvasRotate',
+    name: 'ImageCanvasRotate',
+    component: () => import('@/views/ImageCanvasRotate.vue')
   }
 ];
-
 
 const router = createRouter({
   history: createWebHistory(qiankunWindow.__POWERED_BY_QIANKUN__ ? '/sub-app/vue3-demo/' : '/'),
@@ -72,14 +74,14 @@ const router = createRouter({
 });
 
 // 全局前置守卫
-router.beforeEach((to, from, next) => {
-  // console.log(`从 ${from.name} 页面 跳转到 ${to.name} 页面`);
-  let token = localStorage.getItem('token');
-  if (token) {
-    next();
-  } else {
-    // window.location.href = "/login";
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   // console.log(`从 ${from.name} 页面 跳转到 ${to.name} 页面`);
+//   let token = localStorage.getItem('token');
+//   if (token) {
+//     next();
+//   } else {
+//     // window.location.href = "/login";
+//   }
+// });
 
 export default router;

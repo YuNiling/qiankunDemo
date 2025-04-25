@@ -9,8 +9,20 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ImageUploader: typeof import('./src/components/ImageUploader.vue')['default']
+    PreviewCover: typeof import('./src/components/PreviewCover.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VanButton: typeof import('vant/es')['Button']
+    VanCellGroup: typeof import('vant/es')['CellGroup']
+    VanCol: typeof import('vant/es')['Col']
+    VanDivider: typeof import('vant/es')['Divider']
+    VanField: typeof import('vant/es')['Field']
+    VanIcon: typeof import('vant/es')['Icon']
+    VanImage: typeof import('vant/es')['Image']
+    VanLoading: typeof import('vant/es')['Loading']
+    VanRow: typeof import('vant/es')['Row']
+    VanSpace: typeof import('vant/es')['Space']
+    VanUploader: typeof import('vant/es')['Uploader']
   }
 }
