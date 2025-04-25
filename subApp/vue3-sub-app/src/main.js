@@ -6,10 +6,15 @@ import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helpe
 import router from '@/router/index.js';
 import subStore from '@/store/index.js';
 import { assignNestedProperties } from '@/utils/tools.js';
+import 'vant/es/dialog/style';
+import 'vant/es/toast/style';
+import VConsole from 'vconsole';
 
 let app = null;
 const storeModuleName = 'vue3Module';
 let store;
+
+let vconsole = new VConsole();
 function render(props = {}) {
   const { container, directives, filters, prototypes, eventBus } = props;
 
@@ -41,6 +46,7 @@ function render(props = {}) {
 
   app.use(store);
   app.use(router);
+  app.use(vconsole);
   app.mount(container ? container.querySelector('#app') : '#app');
 
   if (directives) {
