@@ -14,7 +14,7 @@ let app = null;
 const storeModuleName = 'vue3Module';
 let store;
 
-let vconsole = new VConsole();
+// let vconsole = new VConsole();
 function render(props = {}) {
   const { container, directives, filters, prototypes, eventBus } = props;
 
@@ -46,7 +46,7 @@ function render(props = {}) {
 
   app.use(store);
   app.use(router);
-  app.use(vconsole);
+  // app.use(vconsole);
   app.mount(container ? container.querySelector('#app') : '#app');
 
   if (directives) {

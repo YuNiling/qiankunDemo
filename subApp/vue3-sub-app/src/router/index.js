@@ -65,6 +65,11 @@ const routes = [
     path: '/imageCanvasRotate',
     name: 'ImageCanvasRotate',
     component: () => import('@/views/ImageCanvasRotate.vue')
+  },
+  {
+    path: '/trackPlayDemo',
+    name: 'TrackPlayDemo',
+    component: () => import('@/views/TrackPlayDemo.vue')
   }
 ];
 
