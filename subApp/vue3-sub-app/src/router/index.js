@@ -70,6 +70,11 @@ const routes = [
     path: '/trackPlayDemo',
     name: 'TrackPlayDemo',
     component: () => import('@/views/TrackPlayDemo.vue')
+  },
+  {
+    path: '/SQLModelDemo',
+    name: 'SQLModelDemo',
+    component: () => import('@/views/SQLModelDemo.vue')
   }
 ];
 
