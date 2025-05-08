@@ -109,7 +109,7 @@ async function handleRequest(
   cacheTime: number,
 ) {
   try {
-    if (cancelMap.has(key)) {
+    if (config.cache && cancelMap.has(key)) {
       cancelMap.get(key).abort();
       cancelMap.delete(key);
     }

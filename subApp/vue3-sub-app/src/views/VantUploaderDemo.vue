@@ -3,7 +3,7 @@
   <ImageUploader
     v-model="files"
     :max-count="9"
-    :max-size="2 * 1024"
+    :max-size="10 * 1024 * 1024"
     @success="handleSuccess"
     @error="handleError"
   />
